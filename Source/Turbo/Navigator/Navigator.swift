@@ -218,6 +218,8 @@ extension Navigator: SessionDelegate {
         WKWebsiteDataStore.default().httpCookieStore.getAllCookies { cookies in
             HTTPCookieStorage.shared.setCookies(cookies, for: url, mainDocumentURL: url)
         }
+        
+        delegate.requestDidFinish(at: url)
     }
 
     public func sessionDidLoadWebView(_ session: Session) {

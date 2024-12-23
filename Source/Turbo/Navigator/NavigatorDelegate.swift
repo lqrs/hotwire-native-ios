@@ -25,6 +25,10 @@ public protocol NavigatorDelegate: AnyObject {
     /// Respond to authentication challenge presented by web servers behing basic auth.
     /// If not implemented, default handling will be performed.
     func didReceiveAuthenticationChallenge(_ challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void)
+    
+    /// Optional. Called after a request finishes.
+    /// If not implemented, no action is taken.
+    func requestDidFinish(at url: URL)
 
     /// Optional. Called after a form starts a submission.
     /// If not implemented, no action is taken.
@@ -53,6 +57,8 @@ public extension NavigatorDelegate {
     func didReceiveAuthenticationChallenge(_ challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         completionHandler(.performDefaultHandling, nil)
     }
+    
+    func requestDidFinish(at url: URL) {}
 
     func formSubmissionDidStart(to url: URL) {}
 
